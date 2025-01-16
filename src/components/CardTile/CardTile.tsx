@@ -13,7 +13,7 @@ type Props = {
 const CardTile = (props: Props) => {
     return (
         <div className='card-container'>
-            <Icon name={props.iconName}/>
+            <Icon name={props.iconName} className='color-white'/>
             <div className='value-container'>
                 <span>{props.title}</span>
                 <span>{props.value}</span>

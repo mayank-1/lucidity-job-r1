@@ -1,0 +1,30 @@
+@import './../../styles/variables';
+
+.nav-container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid $border-gray;
+
+    .toggle-section {
+        display: flex;
+        align-items: center;
+        span {
+            color: $color-input-value;
+        }
+        & > span:first-child {
+            margin-right: 6px;
+        }
+
+        & > span:last-child {
+            margin-left: 6px;
+            margin-right: 12px;
+        }
+    }
+
+    i {
+        font-size: 30px;
+        margin-left: 20px;
+    }
+}
