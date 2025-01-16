@@ -1,0 +1,26 @@
+@import './../../styles/variables';
+
+.card-container {
+    display: flex;
+    border-radius: $border-radius-16;
+    background-color: $dark-green;
+    padding: $spacing-large;
+
+    i {
+        color: $white;
+        font-size: 24px;
+        margin-top: 2px;
+    }
+
+    .value-container {
+        color: $gray;
+        display: flex;
+        flex-direction: column;
+        margin-left: $spacing-medium;
+
+        & > span:last-child {
+            font-size: 50px;
+            margin-top: 10px;
+        }
+    }
+}

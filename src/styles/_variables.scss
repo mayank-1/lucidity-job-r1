@@ -1,0 +1,77 @@
+// _variables.scss
+
+// Color Variables
+$primary-color: #161718;
+$white: #ffffff;
+$gray: #e0e0e0;
+$dark-gray: #5c5d5e;
+$dark-green: #243425;
+$black-1: #161718;
+$green-light: #c3d763;
+$pink: #c597d4;
+$green-light: #377d23;
+$background-modal: #2a2b27;
+$color-input-value: #979896;
+$green-cancel:#d8f853;
+$green-modal-close:#deff55;
+$background-button: #272826;
+$disabled-color: #808080;
+
+
+// Font Variables
+$font-stack: 'Arial, sans-serif';
+$heading-font: 'Georgia, serif';
+$base-font-size: 16px;
+$small-font-size: 12px;
+$large-font-size: 20px;
+
+// Spacing Variables
+$spacing-small: 8px;
+$spacing-medium: 16px;
+$spacing-large: 24px;
+$spacing-xlarge: 32px;
+
+// Border Variables
+$border-width: 1px;
+$border-style: solid;
+$border-color: #ddd;
+$border-radius-4: 4px;
+$border-radius-8: 8px;
+$border-radius-16: 16px;
+$border-gray: #1f2021;
+$border-button: #3c3d3b;
+
+// Box Shadow Variables
+$box-shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+$box-shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.2);
+$box-shadow-heavy: 0 8px 16px rgba(0, 0, 0, 0.3);
+
+// Width and Height Variables
+$container-width: 1200px;
+$sidebar-width: 300px;
+$header-height: 60px;
+
+// Z-index Variables
+$z-index-header: 1000;
+$z-index-modal: 1050;
+$z-index-tooltip: 1100;
+
+// Animation Variables
+$animation-duration: 0.3s;
+$animation-timing-function: ease-in-out;
+
+// Media Query Breakpoints
+$breakpoint-xs: 480px;
+$breakpoint-sm: 768px;
+$breakpoint-md: 1024px;
+$breakpoint-lg: 1200px;
+
+// Opacity Variables
+$opacity-low: 0.3;
+$opacity-medium: 0.6;
+$opacity-high: 0.9;
+
+// Custom Variables
+$transition-speed: 0.25s;
+$grid-gap: 10px;
+$navbar-height: 50px;

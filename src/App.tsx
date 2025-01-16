@@ -1,34 +1,29 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+
+// COMPONENTS
+import NavBar from './components/Navbar/NavBar';
+import CardTile from './components/CardTile/CardTile';
+
+// STYLES
+import './App.scss'
+
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className='main'>
+        <NavBar/>
+        <div className='body-container'>
+          <p>Inventory stats</p>
+          <div className='card-wrapper'>
+            <CardTile iconName='fa-solid fa-cart-shopping' title='Total product' value='9'/>
+            <CardTile iconName='fa-solid fa-store' title='Total store value' value='30,000'/>
+            <CardTile iconName='fa-solid fa-store-slash' title='Out of stocks' value='2'/>
+            <CardTile iconName='fa-solid fa-shapes' title='No of Category' value='2'/>
+          </div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
   )
 }
 

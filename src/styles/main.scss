@@ -1,0 +1,9 @@
+// src/styles/main.scss
+@import 'variables';
+@import 'mixins';
+
+.container {
+    @include flex-center(column, flex-start, center);
+    padding: $spacing-small;
+    background-color: $primary-color;
+  }

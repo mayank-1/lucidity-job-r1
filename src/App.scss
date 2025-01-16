@@ -1,0 +1,25 @@
+@import './styles/main.scss';
+
+.main {
+    width: 100vw;
+    background-color: $primary-color;
+    height: 100vh;
+}
+
+.body-container {
+    display: flex;
+    flex-direction: column;
+    margin: 40px 16px 16px;
+
+    p {
+        font-size: 50px;
+        color: $white;
+    }
+
+    .card-wrapper {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        justify-content: space-between;
+    }
+}
