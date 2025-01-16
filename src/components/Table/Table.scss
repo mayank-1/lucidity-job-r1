@@ -1,0 +1,51 @@
+@import './../../styles/variables';
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: $background-table;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    border-radius: $border-radius-16;
+    overflow: hidden;
+    margin-top: 30px;
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 2px solid $border-width-1 !important;
+      border-left: none !important; /* Removes the left vertical border */
+      border-right: none !important;
+    }
+
+    th {
+      font-weight: 600;
+      font-size: 0.875rem;
+      letter-spacing: 0.05em;
+      background-color: $background-table !important;
+      color: white;
+      border-top: 0px !important;
+      padding: 15px !important;
+      
+      .col-header {
+        padding: 10px;
+        border-radius: $border-radius-8;
+        width: fit-content;
+        background-color: $primary-color;
+        color: $green-cancel;
+        font-size: 14px;
+      }
+    }
+
+    tr {
+      
+      &:last-child td {
+        border-bottom: none;
+      }
+    }
+
+    td {
+      font-size: 0.95rem;
+      color: $white;
+      padding: 15px !important;
+    }
+  }
