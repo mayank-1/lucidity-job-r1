@@ -1,4 +1,4 @@
-import { useEffect, useState, lazy } from 'react';
+import { useEffect, useState, lazy, useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 
@@ -55,8 +55,8 @@ const getTableHeader = ({ isUser, disableRecord, deleteItem, editItem }: TableHe
 ];
 
 function App() {
-  const [isUser, setIsUser] = useState(false);
-  const [selected, setSelected] = useState({});
+  const [isUser, setIsUser] = useState<boolean>(false);
+  const [selected, setSelected] = useState({});;
 
   const dispatch = useDispatch<AppDispatch>()
   const {loading, items} = useSelector((state: RootState) => state.inventory);
@@ -65,22 +65,24 @@ function App() {
   const outOfStockItems = getTotalOutOfStock(items)
   const totalCategoryCount = getTotalCategory(items);
 
-  const disableRecord = (payload: Item) => {
+  const disableRecord = useCallback((payload: Item) => {
     dispatch(updateItem(payload))
-  }
+  },[dispatch])
 
-  const deleteItem = (name: string) => {
+  const deleteItem = useCallback((name: string) => {
     dispatch(removeItem(name))
-  }
+  },[dispatch])
 
-  const editItem = (item: Item) => {
+  const editItem = useCallback((item: Item) => {
     if (isUser || item.disabled) return;
     setSelected(item);
-  }
+  },[dispatch])
+
+  const tableHeader = useMemo(() => getTableHeader({isUser, disableRecord, deleteItem, editItem}),[isUser, disableRecord, deleteItem, editItem])
 
   useEffect(()=>{
     dispatch(fetchInventory())
-  },[])
+  },[dispatch])
 
   return (
       <div className='main'>
@@ -93,9 +95,9 @@ function App() {
             <CardTile iconName='fa-solid fa-store-slash' title='Out of stocks' value={outOfStockItems}/>
             <CardTile iconName='fa-solid fa-shapes' title='No of Category' value={totalCategoryCount}/>
           </div>
-          <Table data={items} header={getTableHeader({isUser, disableRecord, deleteItem, editItem})} loading={loading}/>
+          <Table data={items} header={tableHeader} loading={loading}/>
         </div>
-        {selected ? <EditItemModal selected={selected} setSelected={setSelected}/>:null}
+        {selected ? <EditItemModal selected={selected} setSelected={setSelected}/> : null}
       </div>
   )
 }
