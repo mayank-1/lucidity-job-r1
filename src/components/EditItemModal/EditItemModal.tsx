@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -27,19 +27,24 @@ const EditItemModal = ({selected, setSelected}: Props) => {
     const [formObj, setFormObj] = useState({})
     const [formError, setFormError] = useState({categoryError: '', priceError: '', quantityError: '', valueError: ''})
     const dispatch = useDispatch<AppDispatch>()
+    const initialFormState = useRef<Item>({} as Item)
 
     const handleSaveItem = () => {
-        const itemObj = formObj as Item;
+        if (JSON.stringify(formObj) !== JSON.stringify(initialFormState.current)) { // Check if the current formObj data is different from the initial selected data, then only do the update
+            const itemObj = formObj as Item;
 
-        const newItem = {
-            ...itemObj,
-            price: ensureDollarPrefix(itemObj.price),
-            value: ensureDollarPrefix(itemObj.value),
-        };
-
-        dispatch(updateItem(newItem));
-        setSelected({});
-        toast.success('Product updated successfully')
+            const newItem = {
+                ...itemObj,
+                price: ensureDollarPrefix(itemObj.price),
+                value: ensureDollarPrefix(itemObj.value),
+            };
+    
+            dispatch(updateItem(newItem));
+            toast.success('Product updated successfully')
+        } else {
+            toast.info('No changes detected')
+        }
+        handleClose()
     }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, name: string) => {
@@ -56,6 +61,7 @@ const EditItemModal = ({selected, setSelected}: Props) => {
     useEffect(() => {
         if (Object.keys(selected).length > 0) {
             setFormObj(selected)
+            initialFormState.current = selected as Item
         }
     },[selected])
 
