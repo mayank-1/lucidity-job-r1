@@ -25,3 +25,13 @@ export const getTotalCategory = (items: Array<Item> | []) => {
     const categories = items.map(item => item.category);
     return new Set([...categories]).size;
 }
+
+export const removeCurrencyFromValue = (symbol: string, value: string) => {
+    if (!value) return '';
+    const parts = value.split(symbol);
+    return parts.length > 1 ? parts.slice(1).join(symbol) : value;
+}
+
+export const ensureDollarPrefix = (value: string): string => {
+    return value.includes('$') ? value : `$${value}`;
+};

@@ -1,0 +1,25 @@
+@import "../../styles/variables";
+
+.btn {
+    cursor: pointer;
+
+    &.disabled {
+        cursor: not-allowed;
+    }
+}
+
+.btn-normal {
+    height: 36px;
+    min-width: 60px;
+    border-radius: 8px;
+    background-color: $background-gray;
+    color: $color-input-value;
+    border-width: 0px;
+}
+
+.btn-link {
+    background: transparent;
+    border: none;
+    color: $green-cancel;
+}
+

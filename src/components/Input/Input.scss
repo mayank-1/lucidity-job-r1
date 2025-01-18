@@ -1,0 +1,29 @@
+@import './../../styles/variables';
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+
+    .input-label {
+        margin-bottom: 16px;
+        color: $color-sub-heading;
+    }
+
+    .input-field {
+        height: 36px;
+        border-radius: 8px;
+        border-width: 0px;
+        line-height: inherit;
+        padding: 0px 8px;
+        background-color: $background-gray;
+        color: $color-input-value;
+
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+    }
+
+
+
+}

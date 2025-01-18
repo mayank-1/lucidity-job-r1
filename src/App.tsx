@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 
@@ -7,6 +7,7 @@ import NavBar from './components/Navbar/NavBar';
 import CardTile from './components/CardTile/CardTile';
 import Table from './components/Table';
 import Icon from './components/Icon/Icon';
+const EditItemModal = lazy(() => import('./components/EditItemModal/EditItemModal'))
 
 // STORE
 import { AppDispatch, RootState } from './store/store';
@@ -27,7 +28,8 @@ import './App.scss'
 interface TableHeaderProps {
   isUser: boolean;
   disableRecord: (payload: Item) => void,
-  deleteItem: (name: string) => void
+  deleteItem: (name: string) => void,
+  editItem: (item: Item) => void
 }
 
 // Define the type for the column header configuration
@@ -37,7 +39,7 @@ interface TableColumn {
   render?: (text: string, row: Item) => JSX.Element;
 }
 
-const getTableHeader = ({ isUser, disableRecord, deleteItem }: TableHeaderProps): TableColumn[] => [
+const getTableHeader = ({ isUser, disableRecord, deleteItem, editItem }: TableHeaderProps): TableColumn[] => [
   { header: "Name", key: "name" },
   { header: "Category", key: "category" },
   { header: "Price", key: "price" },
@@ -45,7 +47,7 @@ const getTableHeader = ({ isUser, disableRecord, deleteItem }: TableHeaderProps)
   { header: "Value", key: "value" },
   { header: "ACTION", key: "action", render: (_: string , row: Item) => {
     return <div className='flex'>
-      <Icon name='fa-solid fa-pencil' disabled={isUser || row.disabled}/>
+      <Icon name='fa-solid fa-pencil' disabled={isUser || row.disabled} onClick={()=>editItem(row)}/>
       <Icon name='fa-solid fa-eye' className={classNames('ml-10',{['color-pink']:!isUser})} disabled={isUser} onClick={() =>disableRecord({...row, disabled: !row.disabled})}/>
       <Icon name='fa-solid fa-trash' className={classNames('ml-10', {['delete-red']:!isUser})} disabled={isUser} onClick={() => deleteItem(row.name)}/>
     </div>
@@ -54,6 +56,7 @@ const getTableHeader = ({ isUser, disableRecord, deleteItem }: TableHeaderProps)
 
 function App() {
   const [isUser, setIsUser] = useState(false);
+  const [selected, setSelected] = useState({});
 
   const dispatch = useDispatch<AppDispatch>()
   const {loading, items} = useSelector((state: RootState) => state.inventory);
@@ -68,6 +71,11 @@ function App() {
 
   const deleteItem = (name: string) => {
     dispatch(removeItem(name))
+  }
+
+  const editItem = (item: Item) => {
+    if (isUser || item.disabled) return;
+    setSelected(item);
   }
 
   useEffect(()=>{
@@ -85,8 +93,9 @@ function App() {
             <CardTile iconName='fa-solid fa-store-slash' title='Out of stocks' value={outOfStockItems}/>
             <CardTile iconName='fa-solid fa-shapes' title='No of Category' value={totalCategoryCount}/>
           </div>
-          <Table data={items} header={getTableHeader({isUser, disableRecord, deleteItem})} loading={loading}/>
+          <Table data={items} header={getTableHeader({isUser, disableRecord, deleteItem, editItem})} loading={loading}/>
         </div>
+        {selected ? <EditItemModal selected={selected} setSelected={setSelected}/>:null}
       </div>
   )
 }
