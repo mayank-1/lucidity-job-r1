@@ -21,7 +21,7 @@ const NavBar = (props: Props) => {
                 <Toggle onChange={handleToggleChange} onColor={props.isUser ? '#7e8945':undefined} onHandleColor={props.isUser ? '#e5fd72' : undefined} checked={props.isUser} height={20} width={48} />
                 <span>user</span>
             </div>
-            <Icon name='fa-solid fa-arrow-right-from-bracket' className='color-white'/>
+            <Icon name='fa-solid fa-arrow-right-from-bracket' className='color-white' disabled/>
         </div>
     )
 }
