@@ -7,7 +7,7 @@ import './CardTile.scss';
 type Props = {
     iconName: string,
     title: string,
-    value?: string 
+    value?: string | number
 }
 
 const CardTile = (props: Props) => {

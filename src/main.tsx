@@ -1,12 +1,22 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.scss'
+import { Provider } from 'react-redux'
+
+// COMPONENTS
 import App from './App.tsx'
 
+// STORE
+import store from './store/store.ts';
+
+// CSS
+import './index.scss'
 import '@fortawesome/fontawesome-free/css/all.css';
+
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </StrictMode>,
 )

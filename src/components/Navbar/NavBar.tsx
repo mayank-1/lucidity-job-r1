@@ -20,7 +20,7 @@ const NavBar = (props: Props) => {
     <div className='nav-container'>
         <div className='toggle-section'>
             <span>admin</span>
-            <Toggle onChange={handleToggleChange} onColor={isUser ? '#7e8945':''} onHandleColor={isUser ? '#e5fd72' : ''} checked={isUser} height={20} width={48} />
+            <Toggle onChange={handleToggleChange} onColor={isUser ? '#7e8945':undefined} onHandleColor={isUser ? '#e5fd72' : undefined} checked={isUser} height={20} width={48} />
             <span>user</span>
         </div>
         <Icon name='fa-solid fa-arrow-right-from-bracket' className='color-white'/>

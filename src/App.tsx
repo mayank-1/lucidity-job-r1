@@ -1,26 +1,24 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 // COMPONENTS
 import NavBar from './components/Navbar/NavBar';
 import CardTile from './components/CardTile/CardTile';
 import Table from './components/Table';
 
+// STORE
+import { AppDispatch, RootState } from './store/store';
+import { fetchInventory } from './store/actions/inventoryActions';
+
+// UTILS
+import { getTotalValue, getTotalOutOfStock, getTotalCategory } from './utils/utils';
+
 // STYLES
 import './App.scss'
 
-
-
-
 function App() {
-  const [count, setCount] = useState(0)
-
-  type User = {
-    name: string,
-    category: string,
-    value: string,
-    quantity: number,
-    price: string
-  };
+  const dispatch = useDispatch<AppDispatch>()
+  const {loading, items} = useSelector((state: RootState) => state.inventory);
   
   const header = [
     { header: "Name", key: "name" },
@@ -28,46 +26,18 @@ function App() {
     { header: "Price", key: "price" },
     { header: "Quantity", key: "quantity" },
     { header: "Value", key: "value" },
-    { header: "ACTION", key: "action" },
+    { header: "ACTION", key: "action", render: () => {
+
+    } },
   ];
-  
-  const data: User[] = [
-    {
-      name: "Bluetooth",
-      category: "Electronic",
-      value: "$150",
-      quantity: 5,
-      price: "$30"
-    },
-    {
-      name: "Edifier M43560",
-      category: "Electronic",
-      value: "0",
-      quantity: 0,
-      price: "$0"
-    },
-    {
-      "name": "Sony 4k ultra 55 inch TV",
-      "category": "Electronic",
-      "value": "$1190",
-      "quantity": 17,
-      "price": "$70"
-    },
-    {
-      "name": "Samsumg 55 inch TV",
-      "category": "Electronic",
-      "value": "$600",
-      "quantity": 50,
-      "price": "$12"
-    },
-    {
-      "name": "samsumg S34 Ultra",
-      "category": "phone",
-      "value": "$0",
-      "quantity": 0,
-      "price": "$0"
-    }
-  ];
+
+  const totalValue = getTotalValue(items)
+  const outOfStockItems = getTotalOutOfStock(items)
+  const totalCategoryCount = getTotalCategory(items);
+
+  useEffect(()=>{
+    dispatch(fetchInventory())
+  },[])
 
   return (
       <div className='main'>
@@ -75,12 +45,12 @@ function App() {
         <div className='body-container'>
           <p className='color-white'>Inventory stats</p>
           <div className='card-wrapper'>
-            <CardTile iconName='fa-solid fa-cart-shopping' title='Total product' value='9'/>
-            <CardTile iconName='fa-solid fa-store' title='Total store value' value='30,000'/>
-            <CardTile iconName='fa-solid fa-store-slash' title='Out of stocks' value='2'/>
-            <CardTile iconName='fa-solid fa-shapes' title='No of Category' value='2'/>
+            <CardTile iconName='fa-solid fa-cart-shopping' title='Total product' value={items.length}/>
+            <CardTile iconName='fa-solid fa-store' title='Total store value' value={totalValue}/>
+            <CardTile iconName='fa-solid fa-store-slash' title='Out of stocks' value={outOfStockItems}/>
+            <CardTile iconName='fa-solid fa-shapes' title='No of Category' value={totalCategoryCount}/>
           </div>
-          <Table data={data} header={header} loading={false}/>
+          <Table data={items} header={header} loading={loading}/>
         </div>
       </div>
   )
