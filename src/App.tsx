@@ -1,6 +1,7 @@
 import { useEffect, useState, lazy, useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
+import { toast } from 'react-toastify';
 
 // COMPONENTS
 import NavBar from './components/Navbar/NavBar';
@@ -71,6 +72,7 @@ function App() {
 
   const deleteItem = useCallback((name: string) => {
     dispatch(removeItem(name))
+    toast.success('Product deleted successfully')
   },[dispatch])
 
   const editItem = useCallback((item: Item) => {

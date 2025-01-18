@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 // COMPONENTS
 import Modal from '../Modal/Modal';
@@ -38,6 +39,7 @@ const EditItemModal = ({selected, setSelected}: Props) => {
 
         dispatch(updateItem(newItem));
         setSelected({});
+        toast.success('Product updated successfully')
     }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, name: string) => {
