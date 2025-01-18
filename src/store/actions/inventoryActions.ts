@@ -1,4 +1,6 @@
 
+import { toast } from 'react-toastify'
+
 import { AppDispatch } from '../store'; // adjust path as needed
 import { setItems, setLoading, setError } from './../features/inventorySlice';
 
@@ -14,6 +16,7 @@ export const fetchInventory = () => async (dispatch: AppDispatch) => {
     dispatch(setItems(newResult));
     dispatch(setLoading(false));
   } catch (error: any) {
+    toast.error('Oops! Please try again later')
     dispatch(setError(error));
     dispatch(setLoading(false));
   }
