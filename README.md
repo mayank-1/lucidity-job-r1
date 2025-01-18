@@ -1,50 +1,108 @@
-# React + TypeScript + Vite
+# Coding Challenge: Lucidity Inventory Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Introduction
 
-Currently, two official plugins are available:
+Lucidity is an Inventory Management System designed to streamline the process of managing inventory for businesses. This project focuses on providing a user-friendly interface for tracking inventory items, managing stock levels, and ensuring efficient inventory operations.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Live Demo
 
-## Expanding the ESLint configuration
+Explore the live version of the Lucidity Inventory Management System:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+[Lucidity Live Demo](https://lucidity-inventory-mayank.netlify.app/)
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+To run the project locally, follow these steps:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1. Clone the repository:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+   ```bash
+   git clone https://github.com/mayank-1/lucidity-job-r1.git
+   ```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+2. Navigate to the project directory:
+
+   ```bash
+   cd lucidity-job-r1
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Start the development server:
+
+   ```bash
+   npm start
+   ```
+
+5. Open your browser and navigate to `http://localhost:3000` to view the application.
+
+## Coding Challenge Details
+
+This project is a coding challenge for an Inventory Management System. Below are the specifics:
+
+### Requirements
+
+1. **Admin View**:
+
+   - Admin can edit, delete, and disable products.
+   - Edit product details in a popup and reflect updates locally.
+   - Delete a product and remove it from the table.
+   - Disable a product, which disables the row and edit button.
+   - Top widgets display total products, total store value, out-of-stock items, and number of categories.
+
+2. **User View**:
+   - Users can only view products.
+   - All action buttons are disabled for users.
+
+### API
+
+- **Endpoint**: `https://dev-0tf0hinghgjl39z.api.raw-labs.com/inventory`
+- **Method**: GET
+
+### Bonus Points
+
+- Implement state management using Redux, MobX, or Recoil.
+
+### Technology Stack
+
+- **Frontend**: React.js with TypeScript
+- **Styling**: SCSS/CSS or design libraries like Material UI, Tailwind CSS, Bootstrap
+
+### Deliverables
+
+- A video summary of the approach and insights.
+- A public GitHub repository link with the code.
+- A working deployment link (e.g., Vercel, Netlify).
+
+## Technologies Used
+
+- **Frontend**: React.js with TypeScript
+- **Styling**: SCSS
+- **Deployment**: Netlify
+- **Notification**: react-toastify
+- **State Management**: Redux-toolkit (Includes Redux-thunk)
+
+## Contributing
+
+Contributions are welcome! Please follow these steps to contribute:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Commit your changes.
+4. Push the branch and create a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any inquiries or feedback, please contact:
+
+**Mayank Kumar**  
+[GitHub Profile](https://github.com/mayank-1)  
+[Live Demo](https://lucidity-inventory-mayank.netlify.app/)
