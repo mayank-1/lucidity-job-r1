@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 // COMPONENTS
 import NavBar from './components/Navbar/NavBar';
 import CardTile from './components/CardTile/CardTile';
+// @ts-ignore
 import Table from './components/Table';
 import Icon from './components/Icon/Icon';
 const EditItemModal = lazy(() => import('./components/EditItemModal/EditItemModal'))

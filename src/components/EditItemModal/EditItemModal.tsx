@@ -12,7 +12,7 @@ import { Item, removeCurrencyFromValue, ensureDollarPrefix } from '../../utils/u
 
 // STORE
 import { AppDispatch } from '../../store/store';
-import { setError, updateItem } from '../../store/features/inventorySlice';
+import { updateItem } from '../../store/features/inventorySlice';
 
 // CSS
 import './EditItemModal.scss'

@@ -11,7 +11,7 @@ type Props = {
 };
 
 const Icon = ({ name, className = '', disabled = false, onClick }: Props) => {
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = () => {
     if (!disabled && onClick) {
       onClick();  // Call onClick only if not disabled
     }
