@@ -59,17 +59,16 @@ const EditItemModal = ({selected, setSelected}: Props) => {
         }
     },[selected])
 
-    useEffect(() => {
-        return () => {
-            setFormObj({})
-            setFormError({categoryError: '', priceError: '', quantityError: '', valueError: ''})
-        }
-    },[])
-
+    const handleClose = () => {
+        setSelected({})
+        setFormObj({})
+        setFormError({categoryError: '', priceError: '', quantityError: '', valueError: ''})
+    }
+ 
     const item = formObj as Item;
 
     return (
-        <Modal isOpen={Object.keys(selected).length > 0} onClose={() => setSelected({})} title="Edit product" modalContainerClassName='modalContainer'>
+        <Modal isOpen={Object.keys(selected).length > 0} onClose={handleClose} title="Edit product" modalContainerClassName='modalContainer'>
             <span className='item-name'>{item.name || '-'}</span>
             <div className='modalBody'>
                 <div className='flex-column'>
@@ -90,7 +89,7 @@ const EditItemModal = ({selected, setSelected}: Props) => {
                 </div>
             </div>
             <div className='modalFooter'>
-                <Button label='Cancel' variant='link' onClick={() => setSelected({})}/>
+                <Button label='Cancel' variant='link' onClick={handleClose}/>
                 <Button label='Save' onClick={handleSaveItem} disabled={Object.values(formError).some(error => error !== '')}/>
             </div>
         </Modal>
