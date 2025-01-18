@@ -18,7 +18,7 @@ export const formatNumberWithCommas = (value: number): string => {
 };
 
 export const getTotalOutOfStock = (items: Array<Item> | []) => {
-    return items.filter(item => Number(item.quantity) === 0 || !item.quantity).length;
+    return items.filter(item => Number(item.quantity) === 0).length;
 }
 
 export const getTotalCategory = (items: Array<Item> | []) => {
