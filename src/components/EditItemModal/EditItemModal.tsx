@@ -11,7 +11,7 @@ import { Item, removeCurrencyFromValue, ensureDollarPrefix } from '../../utils/u
 
 // STORE
 import { AppDispatch } from '../../store/store';
-import { updateItem } from '../../store/features/inventorySlice';
+import { setError, updateItem } from '../../store/features/inventorySlice';
 
 // CSS
 import './EditItemModal.scss'
@@ -24,6 +24,7 @@ type Props = {
 
 const EditItemModal = ({selected, setSelected}: Props) => {
     const [formObj, setFormObj] = useState({})
+    const [formError, setFormError] = useState({categoryError: '', priceError: '', quantityError: '', valueError: ''})
     const dispatch = useDispatch<AppDispatch>()
 
     const handleSaveItem = () => {
@@ -40,7 +41,14 @@ const EditItemModal = ({selected, setSelected}: Props) => {
     }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, name: string) => {
-        setFormObj(prev => ({...prev, [name]: e.target.value}))
+        const { value } = e.target;
+
+        setFormObj(prev => ({ ...prev, [name]: value }));
+
+        setFormError(prev => ({
+            ...prev,
+            [`${name}Error`]: value ? '' : `${name} can't be empty`
+        }));
     }
 
     useEffect(() => {
@@ -49,20 +57,39 @@ const EditItemModal = ({selected, setSelected}: Props) => {
         }
     },[selected])
 
+    useEffect(() => {
+        return () => {
+            setFormObj({})
+            setFormError({categoryError: '', priceError: '', quantityError: '', valueError: ''})
+        }
+    },[])
+
     const item = formObj as Item;
 
     return (
         <Modal isOpen={Object.keys(selected).length > 0} onClose={() => setSelected({})} title="Edit product" modalContainerClassName='modalContainer'>
             <span className='item-name'>{item.name || '-'}</span>
             <div className='modalBody'>
-                <Input label="Category" name="category" value={item.category} onChange={(e) => handleInputChange(e, 'category')}/>
-                <Input label="Price" name="price" value={removeCurrencyFromValue('$',item.price)} onChange={(e) => handleInputChange(e, 'price')}/>
-                <Input label="Quantity" name="quantity" value={item.quantity} onChange={(e) => handleInputChange(e, 'quantity')}/>
-                <Input label="Value" name="value" value={removeCurrencyFromValue('$',item.value)} onChange={(e) => handleInputChange(e, 'value')} />
+                <div className='flex-column'>
+                    <Input label="Category" name="category" value={item.category} onChange={(e) => handleInputChange(e, 'category')}/>
+                    {formError.categoryError && <span className='delete-red error-message'>{formError.categoryError}</span>}
+                </div>
+                <div className='flex-column'>
+                    <Input label="Price" name="price" value={removeCurrencyFromValue('$',item.price)} onChange={(e) => handleInputChange(e, 'price')}/>
+                    {formError.priceError && <span className='delete-red error-message'>{formError.priceError}</span>}
+                </div>
+                <div className='flex-column'>
+                    <Input label="Quantity" name="quantity" value={item.quantity} onChange={(e) => handleInputChange(e, 'quantity')}/>
+                    {formError.quantityError && <span className='delete-red error-message'>{formError.quantityError}</span>}
+                </div>
+                <div className='flex-column'>
+                    <Input label="Value" name="value" value={removeCurrencyFromValue('$',item.value)} onChange={(e) => handleInputChange(e, 'value')} />
+                    {formError.valueError && <span className='delete-red error-message'>{formError.valueError}</span>}
+                </div>
             </div>
             <div className='modalFooter'>
                 <Button label='Cancel' variant='link' onClick={() => setSelected({})}/>
-                <Button label='Save' onClick={handleSaveItem}/>
+                <Button label='Save' onClick={handleSaveItem} disabled={Object.values(formError).some(error => error !== '')}/>
             </div>
         </Modal>
     )

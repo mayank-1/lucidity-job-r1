@@ -23,6 +23,11 @@ body {
   align-items: center;
 }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -33,4 +38,9 @@ body {
 
 .delete-red {
   color: $red-delete;
+}
+
+.error-message {
+  font-size: 12px;
+  margin-top: 4px;
 }
