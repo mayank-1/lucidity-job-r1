@@ -8,3 +8,29 @@ body {
 .color-white {
   color: $white;
 }
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.color-pink {
+  color: $pink;
+}
+
+.delete-red {
+  color: $red-delete;
+}

@@ -49,3 +49,7 @@ table {
       padding: 15px !important;
     }
   }
+
+  .disabled {
+    color: $disabled-color;
+  }

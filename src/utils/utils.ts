@@ -3,7 +3,8 @@ export type Item = {
     category: string,
     value: string,
     quantity: number,
-    price: string
+    price: string,
+    disabled: boolean
   };
 
 export const getTotalValue = (items: Array<Item> | []) => {

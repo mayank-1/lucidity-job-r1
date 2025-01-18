@@ -1,0 +1,10 @@
+@import './../../styles/variables';
+
+.disabled {
+    color: $disabled-color;
+    cursor: not-allowed;
+}
+
+.active {
+    cursor: pointer;
+}

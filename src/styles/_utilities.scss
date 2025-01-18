@@ -1,0 +1,8 @@
+// SCSS for ml-{*} where * increments by 1
+$max: 300; // Maximum value for *
+
+@for $i from 1 through $max {
+  .ml-#{$i} {
+    margin-left: #{$i}px;
+  }
+}

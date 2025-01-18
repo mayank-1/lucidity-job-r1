@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 
 // CSS
 import "./Table.scss";
@@ -82,6 +83,7 @@ const Table = ({ header, data = [], loading = false }) => {
                 <td
                   key={col.key || colIndex}
                   style={{ border: "1px solid #ddd", padding: "8px" }}
+                  className={classNames({ ["disabled"]: row.disabled })}
                 >
                   {renderCell(col, row)}
                 </td>

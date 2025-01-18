@@ -1,6 +1,7 @@
 // src/styles/main.scss
 @import 'variables';
 @import 'mixins';
+@import 'utilities';
 
 .container {
     @include flex-center(column, flex-start, center);

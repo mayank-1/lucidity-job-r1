@@ -5,7 +5,8 @@ export interface Inventory {
     category: string,
     value: string,
     quantity: number,
-    price: string
+    price: string,
+    disabled: boolean,
 }
 
 interface InventoryState {
