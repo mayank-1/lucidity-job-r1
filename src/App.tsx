@@ -11,7 +11,7 @@ import Icon from './components/Icon/Icon';
 // STORE
 import { AppDispatch, RootState } from './store/store';
 import { fetchInventory } from './store/actions/inventoryActions';
-import { updateItem } from './store/features/inventorySlice';
+import { removeItem, updateItem } from './store/features/inventorySlice';
 
 // UTILS
 import { getTotalValue, getTotalOutOfStock, getTotalCategory } from './utils/utils';
@@ -26,7 +26,8 @@ import './App.scss'
 // Define the type for the props passed to getTableHeader
 interface TableHeaderProps {
   isUser: boolean;
-  disableRecord: (payload: Item) => void
+  disableRecord: (payload: Item) => void,
+  deleteItem: (name: string) => void
 }
 
 // Define the type for the column header configuration
@@ -36,7 +37,7 @@ interface TableColumn {
   render?: (text: string, row: Item) => JSX.Element;
 }
 
-const getTableHeader = ({ isUser, disableRecord }: TableHeaderProps): TableColumn[] => [
+const getTableHeader = ({ isUser, disableRecord, deleteItem }: TableHeaderProps): TableColumn[] => [
   { header: "Name", key: "name" },
   { header: "Category", key: "category" },
   { header: "Price", key: "price" },
@@ -46,7 +47,7 @@ const getTableHeader = ({ isUser, disableRecord }: TableHeaderProps): TableColum
     return <div className='flex'>
       <Icon name='fa-solid fa-pencil' disabled={isUser || row.disabled}/>
       <Icon name='fa-solid fa-eye' className={classNames('ml-10',{['color-pink']:!isUser})} disabled={isUser} onClick={() =>disableRecord({...row, disabled: !row.disabled})}/>
-      <Icon name='fa-solid fa-trash' className={classNames('ml-10', {['delete-red']:!isUser})} disabled={isUser}/>
+      <Icon name='fa-solid fa-trash' className={classNames('ml-10', {['delete-red']:!isUser})} disabled={isUser} onClick={() => deleteItem(row.name)}/>
     </div>
   } },
 ];
@@ -65,6 +66,10 @@ function App() {
     dispatch(updateItem(payload))
   }
 
+  const deleteItem = (name: string) => {
+    dispatch(removeItem(name))
+  }
+
   useEffect(()=>{
     dispatch(fetchInventory())
   },[])
@@ -80,7 +85,7 @@ function App() {
             <CardTile iconName='fa-solid fa-store-slash' title='Out of stocks' value={outOfStockItems}/>
             <CardTile iconName='fa-solid fa-shapes' title='No of Category' value={totalCategoryCount}/>
           </div>
-          <Table data={items} header={getTableHeader({isUser, disableRecord})} loading={loading}/>
+          <Table data={items} header={getTableHeader({isUser, disableRecord, deleteItem})} loading={loading}/>
         </div>
       </div>
   )
